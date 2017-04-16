@@ -45,3 +45,9 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+assignment1/eval.py
+*.small
+assignment1/vocab
+assignment1/strings
+*.bad
+assignment1/try.fsa
