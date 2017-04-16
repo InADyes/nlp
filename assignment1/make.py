@@ -7,6 +7,7 @@ states = []
 #f = open('vocab.small') #used for testing purposes
 t = open('english.fsa', 'w+')   #create fsa file
 #iterate thru every word in dict
+t.write ('1\n')
 for w in sys.stdin:
 
     #iterate thru letter in word
@@ -22,8 +23,8 @@ for w in sys.stdin:
             currentState = '(' + substr[:-1] + ' (' + substr + ' ' + substr[-1] + '))'
             #print currentState
             states.append(substr)
-            if currentState == "( (A A))":
-                currentState = "1\n(0 (A A))"
+            if "( (" in currentState:
+                currentState.replace("( (", "(0 (")
             t.write(currentState+'\n')
 
     t.write('(' + substr + ' (1 *e*))\n')
