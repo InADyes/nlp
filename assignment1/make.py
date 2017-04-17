@@ -23,8 +23,10 @@ for w in sys.stdin:
             currentState = '(' + substr[:-1] + ' (' + substr + ' ' + substr[-1] + '))'
             #print currentState
             states.append(substr)
-            if "( (" in currentState:
-                currentState.replace("( (", "(0 (")
+            if '( (' in currentState:
+                #print currentState
+		currentState = currentState.replace('( (', '(0 (')
+		#print currentState
             t.write(currentState+'\n')
 
     t.write('(' + substr + ' (1 *e*))\n')
