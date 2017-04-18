@@ -44,10 +44,10 @@ for s in states:
     for c in trans:
         prob = cntdict [s][c]/ctot
         if c == '_':
-            print '(' +s+'(1 *e* '+str(prob)+'))'
+            print '(' +s+' (1 *e* '+str(prob)+'))'
         else:
             if s == '0':
-                print '(' +s+'('+c+' '+c+' '+str(prob)+'))'
+                print '(' +s+' ('+c+' '+c+' '+str(prob)+'))'
             else:
-                print '(' +s+'('+s+' '+c+' '+c+' '+str(prob)+'))'
+                print '(' +s+' ('+s+' '+c+' '+c+' '+str(prob)+'))'
 print'(1 (0 _ 1.0))'
