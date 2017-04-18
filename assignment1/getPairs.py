@@ -42,12 +42,16 @@ for s in states:
     for c in trans:
         ctot += cntdict[s][c]
     for c in trans:
-        prob = cntdict [s][c]/ctot
+        prob = round((cntdict[s][c]/float(ctot)),3)
+        #print (prob,cntdict[s][c], ctot)
         if c == '_':
+            #print " "
             print '(' +s+' (1 *e* '+str(float(prob))+'))'
         else:
             if s == '0':
+                #print " "
                 print '(' +s+' ('+c+' '+c+' '+str(float(prob))+'))'
             else:
+                #print " "
                 print '(' +s+' ('+s+' '+c+' '+c+' '+str(float(prob))+'))'
 print'(1 (0 _ 1.0))'
