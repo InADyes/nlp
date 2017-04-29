@@ -1,0 +1,3 @@
+PART II
+1. See 2.1. txt
+2. This command gives nonsense output because Carmel tries to pronounce each individual letter of the word (because the input is a character  string rather than a whole word). Therefore, it takes the most probabilistically likely pronunciation of each individual letter, without considering how it might be pronounced as part of a word.
