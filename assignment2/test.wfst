@@ -1,0 +1,8 @@
+F
+(0 (H H *e* 1.0))
+(H (HE E *e* 1.0))
+(HE (HEL L *e* 1.0))
+(HEL (HELL L *e* 1.0))
+(HELL (HELLO O *e* 1.0))
+(HELLO (F *e* HELLO 1.0))
+
