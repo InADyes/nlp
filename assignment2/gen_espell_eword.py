@@ -1,5 +1,5 @@
 f = open('eword-epron.data', 'r')
-t = open('eword-espell.wfst', 'w+')
+t = open('espell-eword.wfst', 'w+')
 states = []
 t.write('F\n')
 for line in f:
@@ -16,3 +16,4 @@ for line in f:
     string = "(" + word + " (F *e* " + word + " 1.0))" + '\n'
     t.write(string)
 t.close()
+f.close()
