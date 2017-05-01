@@ -52,3 +52,4 @@ assignment1/strings
 *.bad
 assignment1/try.fsa
 assignment1/english.fsa
+assignment2/espell-eword.wfst
