@@ -1,68 +1,59 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sun Apr 30 14:52:31 2017
-
-@author: adivt
+CS519 NLP ASSIGNMENT 2
+PART 3
 """
 from collections import defaultdict
 from itertools import *
+import re
+
+english_counts = {}
 file = 'f'
-tuples = []
 x = {}
-stacks = []
-#while file:
-with open('epron-jpron-small.data', 'r') as file:
+file = open('epron-jpron-small.data', 'r')
+while True:
     lines = islice(file, 3)
 
     stack =[]
-    
     #create the stack
     for line in lines:
         stack.append(line)
+    if stack == []:break
+    epron = re.split(r'(\s+)', stack[0])
+    jpron = re.split(r'(\s+)', stack[1])
+    mapping = re.split(r'(\s+)', stack[2])
     
-    epron = stack[0].split()
-    jpron = stack[1].split()
-    mapping = [int(i) for i in stack[2].split()]
-    skip = False
-    dup = ''
-    tlist = []
-    for i in range(len(mapping)):
-        tlist.append([epron[mapping[i]-1], jpron[i]])
+    for i in range(len(jpron)):
+        if i < len(jpron) and jpron[i] == ' ' and mapping[i-1] == mapping[i+1]:
+            jpron[i] = '_'
     
-    for i in range(len(tlist)):
-        if tlist[i][0] not in x: 
-            x[tlist[i][0]] = []
-    substr = ''
-    ctr =0
-    for i in range(len(tlist)):
-        if i < (len(tlist)-1) and tlist[i][0] == tlist[i+1][0]:
-            if ctr == 0:
-                substr = ''
-                substr += tlist[i][1]+ tlist[i+1][1]
-            else:
-                substr += tlist[i][1]
-            ctr += 1
-            print((tlist[i][0], tlist[i+1][0] ,  substr))
+    epron = ''.join(str(e) for e in epron)
+    jpron = ''.join(str(e) for e in jpron)
+    mapping = ''.join(str(e) for e in mapping)
+    
+    jphone = jpron.split()
+    ephone = epron.split()
+    
+    for i in range(len(ephone)):
+        if ephone[i] not in english_counts:
+            english_counts[ephone[i]] = 1
         else:
-            substr = tlist[i][1]
-            print((tlist[i][0],  substr))
-            
-        x[tlist[i][0]].append(substr)
-        
-#        for i in range(len(jpron)):
-#            t=[epron[int(mapping[i])-1], jpron[i]]
-#            tuples.append(t)
-        
-#        for i in tuples:
-#            
-#            #if the Key-Value pair does not exist, create a kvp of the following
-#            #key = (epron, jpron)
-#            #value = (count of jpron, count of epron)
-#            #
-#            if not x[i]:
-#                x[i] = (1, 1)
-#            else:
-#                x[i] = 
-                
-                
-            
+            english_counts[ephone[i]] += 1
+        jphone[i] = jphone[i].replace('_', ' ')
+        if (ephone[i], jphone[i]) not in x: 
+            x[ephone[i], jphone[i]] = 1
+        else:
+            x[ephone[i], jphone[i]] += 1
+    
+
+file.close()
+
+t = open('epron-jpron.probs', 'w')
+
+for i in x:
+    string = ''
+    ecount = english_counts[i[0]]
+    jcount = x[i]
+    string += i[0] + ' : ' + i[1] + ' # ' + str(round(jcount/ecount, 2)) + '\n'
+    t.write(string)
+t.close()
