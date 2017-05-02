@@ -10,7 +10,7 @@ import re
 english_counts = {}
 file = 'f'
 x = {}
-file = open('epron-jpron-small.data', 'r')
+file = open('epron-jpron.data', 'r')
 while True:
     lines = islice(file, 3)
 
