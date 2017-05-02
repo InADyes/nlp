@@ -1,0 +1,178 @@
+EY : A # 0.1
+B : B # 0.83
+AH : E # 0.11
+L : R U # 0.36
+AH : A # 0.6
+AW : A U # 0.69
+T : T O # 0.24
+K : K # 0.56
+SH : SH I # 0.04
+EY : E E # 0.58
+S : S U # 0.42
+AE : A # 0.94
+S : S # 0.37
+T : T # 0.44
+OW : O # 0.56
+N : N # 0.97
+ER : A A # 0.79
+K : K U # 0.2
+D : D O # 0.26
+D : D # 0.56
+M : M U # 0.22
+AA : A # 0.46
+D : J # 0.03
+IH : I # 0.92
+M : M # 0.68
+IY : I I # 0.59
+JH : J # 0.25
+AH : I # 0.07
+F : H # 0.58
+EH : E # 0.95
+R : A # 0.27
+F : H U # 0.33
+G : G # 0.68
+R : R # 0.61
+JH : J I # 0.19
+EY : E # 0.15
+Z : I # 0.03
+G : G U # 0.19
+HH : H # 0.96
+D : DD O # 0.06
+AY : A I # 0.84
+IY : I # 0.29
+EY : E I # 0.12
+AO : O # 0.64
+R : O # 0.07
+IY : E # 0.07
+Z : S U # 0.07
+L : R # 0.63
+SH : SH # 0.31
+P : PP U # 0.13
+W : W # 0.74
+AO : O O # 0.26
+IY : E E # 0.03
+OY : O I # 0.86
+Z : Z # 0.27
+AA : O # 0.49
+M : N M # 0.01
+M : N # 0.08
+P : P # 0.64
+AH : U # 0.06
+NG : N # 0.62
+JH : Z # 0.04
+ER : A R # 0.03
+N : NN # 0.02
+TH : SH # 0.16
+AH : O # 0.13
+P : PP # 0.06
+P : P U # 0.16
+W : U # 0.17
+B : B U # 0.16
+CH : CH I # 0.22
+CH : CH Y # 0.19
+EH : A # 0.03
+Z : Z U # 0.24
+OW : O O # 0.41
+T : TS # 0.04
+S : U # 0.05
+AA : A A # 0.02
+SH : SSH Y U # 0.15
+ZH : J I # 0.29
+T : TT O # 0.17
+K : KK U # 0.16
+K : KK # 0.05
+AA : O O # 0.01
+Y : E # 0.02
+IH : A # 0.01
+JH : JJ I # 0.13
+F : HH # 0.04
+G : GG U # 0.1
+UW : U U # 0.65
+AO : A # 0.05
+NG : N G U # 0.22
+R : R U # 0.02
+Z : U # 0.17
+CH : TCH I # 0.26
+TH : S U # 0.48
+T : TT # 0.03
+D : Z # 0.03
+IH : E # 0.05
+V : B # 0.76
+Y : I # 0.26
+UH : U # 0.78
+T : TS U # 0.02
+OW : O U # 0.02
+OY : O O I # 0.04
+UW : U # 0.23
+Y : Y # 0.71
+SH : SSH # 0.02
+S : SS # 0.02
+ER : A # 0.08
+AY : A I Y # 0.01
+AE : Y A # 0.04
+S : SH # 0.08
+EY : A I # 0.03
+K : K I # 0.01
+ER : E R # 0.02
+SH : SH Y # 0.33
+T : U # 0.02
+NG : O # 0.01
+TH : S # 0.22
+V : A # 0.02
+ER : O R # 0.02
+CH : CH # 0.25
+UH : O # 0.03
+V : B U # 0.17
+SH : SSH Y # 0.12
+Z : N # 0.03
+Z : J # 0.06
+UW : Y U U # 0.08
+NG : N G # 0.09
+T : CH # 0.02
+AW : A # 0.04
+AY : A # 0.03
+UW : Y U # 0.02
+W : O # 0.04
+JH : J Y # 0.35
+CH : TCH # 0.03
+TH : CH # 0.04
+UH : U U # 0.1
+DH : A Z # 0.08
+AO : A U # 0.03
+DH : Z # 0.83
+AY : I # 0.09
+Y : A # 0.02
+Z : A # 0.06
+NG : I # 0.04
+TH : E T E # 0.02
+TH : O T O # 0.02
+Z : O # 0.02
+SH : E # 0.01
+AW : A W # 0.15
+AW : O O # 0.02
+OY : O # 0.04
+V : W # 0.03
+AW : A O # 0.06
+AY : A Y # 0.01
+NG : U # 0.01
+ZH : J Y # 0.43
+TH : T # 0.02
+W : I # 0.02
+UH : U A # 0.07
+Z : S # 0.02
+S : SSH # 0.01
+ZH : J # 0.29
+NG : A # 0.01
+TH : R # 0.02
+AW : O # 0.02
+CH : TCH Y # 0.02
+F : HH U # 0.02
+AW : U U # 0.02
+OY : I # 0.04
+OY : O E # 0.04
+HH : W # 0.02
+DH : Z U # 0.08
+UH : DD # 0.03
+TH : U T O # 0.02
+SH : Y U # 0.01
+PAUSE : PAUSE # 1.0
