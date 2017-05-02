@@ -54,8 +54,8 @@ for i in x:
     string = ''
     ecount = english_counts[i[0]]
     jcount = x[i]
-    print(round(jcount/ecount, 3))
-    if round(jcount/ecount, 3) > 0.01:
-        string += i[0] + ' : ' + i[1] + ' # ' + str(round(jcount/ecount, 2)) + '\n'
-        t.write(string)
+    print(round(jcount/ecount, 2))
+    string += i[0] + ' : ' + i[1] + ' # ' + str(round(jcount/ecount, 2)) + '\n'
+    #if round(jcount/ecount, 2) > 0.01:
+    t.write(string)
 t.close()
