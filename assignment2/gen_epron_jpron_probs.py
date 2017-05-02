@@ -3,7 +3,6 @@ t = open ('epron-jpron.wfst', 'w+')
 t.write('F\n')
 for line in f:
     s = line.split()
-    trans = s[0]
     if len(s) == 5:
 	string = "(0 (0 " + s[0] + " " + s[2] + " " + s[4] + "))" + '\n'
 	t.write(string)
