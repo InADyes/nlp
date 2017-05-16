@@ -59,15 +59,20 @@ def viterbi(line, wt, T, tags):
     for i in range(len(line)):
         for tag in range(len(tags)):
             for tag_prev in range(len(tags)):
-                ptt = T[tag_prev][tag]
+                
+                
+                ###ERROR IS PROBABLY HERE####
                 ptuple = (line[i], tags[tag])
-                ptw = wt[ptuple]
-                p = ptt * ptw
-                mu = opt[i-1] * p
-                #print(mu, i, p)
+                ptt = T[tag_prev][tag] #ptt = p(tag | tag_prev)
+                ptw = wt[ptuple] #ptw = p(word | tag)
+                p = ptt * ptw #p = p(tag | tag_prev) * p(word | tag)
+                mu = opt[i-1] * p #prob of best seq ending in i - 1
+                
                 if mu > opt[i]:
                     opt[i] = mu
                     back.append(tag)
+                #############################
+                
     tag_seq = [0]* len(line)
     tag_seq[-1] = "***"
     for i in range(len(line), 0, -1):
