@@ -13,7 +13,6 @@ def getprobabilities():
     for line in lexicon:
         x = regex.sub(' ', line)
         x = x.split()
-        print(x)
         if len(x) < 1:
             return wt
         ptuple = (x[1], x[0])
@@ -52,7 +51,7 @@ def getWeights(tags):
             E[tag_curr_index] = int(x[-2])
     return (E,T, tags)
 
-def viterbi_alt(line, wt, T, tags):
+def viterbi(line, wt, T, tags):
     line = line.split()
     opt = [0]*len(line)
     back = []
@@ -61,7 +60,6 @@ def viterbi_alt(line, wt, T, tags):
         for tag in range(len(tags)):
             for tag_prev in range(len(tags)):
                 ptt = T[tag_prev][tag]
-                print(i, tag)
                 ptuple = (line[i], tags[tag])
                 ptw = wt[ptuple]
                 p = ptt * ptw
@@ -72,10 +70,10 @@ def viterbi_alt(line, wt, T, tags):
                     back.append(tag)
     tag_seq = [0]* len(line)
     tag_seq[-1] = "***"
-    for i in range(len(line), 1, -1):
-        print(back)
+    for i in range(len(line), 0, -1):
+        #print(back)
         tag_seq[i-1] = tags[back[i]]
-    print(tag_seq)
+    return tag_seq
 
 
 
@@ -84,5 +82,6 @@ tags = []
 
 (E,T, tags) = getWeights(tags)
 wt = getprobabilities()
-line = "They can fish"
-viterbi_alt(line, wt, T, tags)
+line = "They can fish"#"The panda eats shoots and leaves"
+results = viterbi(line, wt, T, tags)
+print(results)
