@@ -24,17 +24,38 @@ def getWeights():
         x = x.split()
         #print(x)
         if x[0] in tags and x[1] in tags:
-            tag_1_index = tags.index(x[0])
-            tag_2_index = tags.index(x[1])
+            tag_prev_index = tags.index(x[0])
+            tag_curr_index = tags.index(x[1])
             if int(x[-1]) < 10:
-                T[tag_1_index][tag_2_index] = int(x[-1])/10
+                T[tag_prev_index][tag_curr_index] = int(x[-1])/10
             else:
-                T[tag_1_index][tag_2_index] = int(x[-1])/100
+                T[tag_prev_index][tag_curr_index] = int(x[-1])/100
         elif len(x) > 1 and x[1] in tags:
-            tag_2_index = tags.index(x[1])
-            E[tag_2_index] = int(x[-2])
+            tag_curr_index = tags.index(x[1])
+            E[tag_curr_index] = int(x[-2])
     return (E,T)
 
+def viterbi_alt(line, E, T, tags):
+    opt = []
+    back = []
+    opt[0] = 1
+    
+    for i in range(len(line)):
+        for tag in range(tags):
+            for tag_prev in range(tags):
+                ptt = T[tag_prev][tag]
+                ptw = 1 #change to actual weight
+                p = ptt * ptw
+                mu = opt[i-1] * p
+                if mu > opt[i]:
+                    opt[i] = mu
+                    
+                    back[i] = tag
+    tag_seq = [i for i in range(len(line))]
+    tag_seq[-1] = 
+    for i in range(len(line), 1, -1):
+        t_prev = back[i]
+                
 
 
 def viterbi(line, E, T, tags):
