@@ -1,12 +1,29 @@
 import numpy as np
+from collections import defaultdict
 import re
 
 """
 Weight matrix:
 """
-
-
-def getWeights():
+def getprobabilities():
+    wt = defaultdict(float)
+    regex = re.compile('[^a-zA-Z0-9]')
+    
+    lexicon = open('lexicon-w-t.txt', 'r')
+    for line in lexicon:
+        x = regex.sub(' ', line)
+        x = x.split()
+        print(x)
+        if len(x) < 1:
+            return wt
+        ptuple = (x[1], x[0])
+        if len(x[-1]) > 1:
+            wt[ptuple] = int(x[-1])/100
+        else:
+            wt[ptuple] = int(x[-1])/10
+    return wt
+        
+def getWeights(tags):
     file = open('bigram.wfsa', 'r')
     regex = re.compile('[^a-zA-Z0-9]')
     for line in file:
@@ -33,57 +50,39 @@ def getWeights():
         elif len(x) > 1 and x[1] in tags:
             tag_curr_index = tags.index(x[1])
             E[tag_curr_index] = int(x[-2])
-    return (E,T)
+    return (E,T, tags)
 
-def viterbi_alt(line, E, T, tags):
-    opt = []
+def viterbi_alt(line, wt, T, tags):
+    line = line.split()
+    opt = [0]*len(line)
     back = []
     opt[0] = 1
-    
     for i in range(len(line)):
-        for tag in range(tags):
-            for tag_prev in range(tags):
+        for tag in range(len(tags)):
+            for tag_prev in range(len(tags)):
                 ptt = T[tag_prev][tag]
-                ptw = 1 #change to actual weight
+                print(i, tag)
+                ptuple = (line[i], tags[tag])
+                ptw = wt[ptuple]
                 p = ptt * ptw
                 mu = opt[i-1] * p
+                #print(mu, i, p)
                 if mu > opt[i]:
                     opt[i] = mu
-                    
-                    back[i] = tag
-    tag_seq = [i for i in range(len(line))]
-    tag_seq[-1] = 
+                    back.append(tag)
+    tag_seq = [0]* len(line)
+    tag_seq[-1] = "***"
     for i in range(len(line), 1, -1):
-        t_prev = back[i]
-                
+        print(back)
+        tag_seq[i-1] = tags[back[i]]
+    print(tag_seq)
 
 
-def viterbi(line, E, T, tags):
-    words = line.split()
-    x = np.ones((len(tags), len(line)))
-    
-    for i, word in enumerate(words):
-        if i == 0:
-            for tagid, atag in enumerate(tags):
-                x[tagid][i] = E.get((atag,aword.lower()),-1*np.inf)
-                b[tagid][i] = -1 # Means this is the first word
-            continue
-        for atagid, atag in enumerate(tags):
-            emmval = E.get((atag,aword.lower()),-1*1e10)
-            for atagid_prev, atag_prev in enumerate(tags):
-                trval = T.get((atag_prev,atag),-1*1e10)
-                total = x[atagid_prev][i-1]+emmval+trval
-                if total > x[atagid][i]:
-                    x[atagid][i] = total
-                    b[atagid][i] = atagid_prev
-    idx = np.argmax(x[:][-1])
-    annotate = []
-    for idx_ in np.size(b,axis=1),0,-1):
-        annotate.append(tags[int(idx)])
-        idx = b[idx,idx_-1]
-    annotate.reverse()
-    return words,annot
 
 
 tags = []
-(E,T) = getWeights()
+
+(E,T, tags) = getWeights(tags)
+wt = getprobabilities()
+line = "They can fish"
+viterbi_alt(line, wt, T, tags)
