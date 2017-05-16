@@ -58,29 +58,37 @@ def viterbi(line, wt, T, tags):
     opt = [0]*len(line)
     back = []
     opt[0] = 1
+    
     for i in range(len(line)):
         for tag in tag_dict[line[i]]:   #tag = tag of word i
-            for tag_prev in tag_dict[line[i-1]]:    #t_prev = tag of i - 1
-                                
+            ptuple = (line[i], tag)
+            if i == 0:
+                if len(tag_dict[line[i]]) < 2:
+                    first_tag = tag
+                else:
+                    td = defaultdict(float)
+                    for ttag in tag_dict[line[i]]:
+                        td[ttag] = wt[ptuple]
+                    first_tag = max(td, key=td.get)
+            for tag_prev in tag_dict[line[i-1]]:
+
                 ###ERROR IS PROBABLY HERE####
-                ptuple = (line[i], tag)
-                #print(ptuple)
+
                 ptt = T[tags.index(tag_prev)][tags.index(tag)] #ptt = p(tag | tag_prev)
                 ptw = wt[ptuple] #ptw = p(word | tag)
                 p = ptt * ptw #p = p(tag | tag_prev) * p(word | tag)
                 mu = opt[i-1] * p #prob of best seq ending in i - 1
-                
                 if mu > opt[i]:
                     opt[i] = mu
                     back.append(tag)
-                
+                    #print(back)
                 #############################
-    
-    del back[-1]             
-    tag_seq = [0]* len(line)
-    for i in range(len(line), 0, -1):
-
-        tag_seq[i-1] = back[i-1]
+    #print(back)   
+    back = back[:len(line)-1]    
+    back.append(first_tag)
+    tag_seq = []
+    for i in reversed(back):
+        tag_seq.append(i)
     return tag_seq
 
 
@@ -90,6 +98,8 @@ tags = []
 
 (E,T, tags) = getWeights(tags)
 (wt, tag_dict) = getprobabilities()
-line = "They can fish"#"The panda eats shoots and leaves"
-results = viterbi(line, wt, T, tags)
+line1 = "They can fish"
+line2 = "Time flies like an arrow"
+line3 =  "They can can a can"
+results = viterbi(line2, wt, T, tags)
 print(results)
