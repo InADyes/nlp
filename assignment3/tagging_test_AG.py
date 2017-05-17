@@ -73,7 +73,6 @@ def viterbi(line, wt, T, tags):
             for tag_prev in tag_dict[line[i-1]]:
 
                 ###ERROR IS PROBABLY HERE####
-
                 ptt = T[tags.index(tag_prev)][tags.index(tag)] #ptt = p(tag | tag_prev)
                 ptw = wt[ptuple] #ptw = p(word | tag)
                 p = ptt * ptw #p = p(tag | tag_prev) * p(word | tag)
@@ -81,9 +80,8 @@ def viterbi(line, wt, T, tags):
                 if mu > opt[i]:
                     opt[i] = mu
                     back.append(tag)
-                    #print(back)
                 #############################
-    #print(back)   
+
     back = back[:len(line)-1]    
     back.append(first_tag)
     tag_seq = []
