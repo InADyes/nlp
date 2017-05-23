@@ -7,6 +7,16 @@ cntdict2 = defaultdict(dict)
 ttlen = 0
 
 
+chars = ['a', 'b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+
+for i in range(len(chars)):
+    for j in range(len(chars)):
+	bistate = chars[i]+chars[j]
+	if bistate not in cntdict2:
+	    cntdict2[bistate] = 1
+
+
+
 for line in f:
     line = line.replace('\n', '</s>')
     #print line

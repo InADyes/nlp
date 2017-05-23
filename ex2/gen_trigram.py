@@ -7,6 +7,22 @@ cntdict2 = defaultdict(dict)
 cntdict3 = defaultdict(dict)
 ttlen = 0
 
+chars = ['a','</s>', 'b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','_']
+
+for i in range(len(chars)):
+    for j in range(len(chars)):
+	bistate = chars[i]+chars[j]
+	if bistate not in cntdict2:
+	    cntdict2[bistate] = 1
+
+for i in range(len(chars)):
+    for j in range(len(chars)):
+	for k in range(len(chars)):
+	    tristate = chars[i]+chars[j]+chars[k]
+	    if tristate not in cntdict3:
+		cntdict3[tristate] = 1
+
+
 
 for line in f:
     line = line.replace('\n', '</s>')
