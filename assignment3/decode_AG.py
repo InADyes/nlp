@@ -33,6 +33,6 @@ def viterbi(line, epron_bigram_probs, epron_jpron_probs, epron_jpron_mapping):
         for phon in epron_jpron_mapping[line[i]]:
             for phon_prev in epron_jpron_mapping[line[i-1]]:
                 for phon_pp in epron_jpron_mapping[line[i-2]]:
-                    p_w = 
+                    p_w = 1
     
 (epron_bigram_probs, epron_jpron_probs, epron_jpron_mapping) = readfiles()

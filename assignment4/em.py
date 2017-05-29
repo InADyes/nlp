@@ -1,56 +1,62 @@
-import random
+# -*- coding: utf-8 -*-
+"""
+ASSIGNMENT 4 NLP
+@author: Aditya
+"""
+
+import numpy as np
+import re
 from collections import defaultdict
+from itertools import *
 
+file = open('epron-jpron.data.test', 'r')
 
-EPJPdict = defaultdict(dict)
-EJpair = ['W_W','AY_A','N_I-N','AY_A-I','N_N','W_W-A','AY_I']
+def isnumeric(string):
+   return bool(re.search(r'\d', string))
 
-for s in EJpair:
-    if s not in EPJPdict:
-	EPJPdict[s] =1/float(len(EJpair))
-	#if len(s) == 3:
-	#    print s[0] +'|->  '+s[2]+': '+str(EPJPdict[s])
-	#if len(s) == 4:
-	#    print s[:1] +'|->  '+s[3]+': '+str(EPJPdict[s])
-	#if len(s) == 5:
-	#    print s[0] +'|->  '+s[2]+' '+s[4]+': '+ str(EPJPdict[s])
-	#if len(s) == 6:
-	#    print s[:1] +'|->  '+s[3]+' '+s[5]+': '+str(EPJPdict[s])
+probs = defaultdict(lambda: defaultdict(float))
+epjp = []
 
-#f = open('lined.txt', 'r')
-#lines = f.readlines()
-#f.close() 
-#for i in range(0,len(lines)):
-#    print lines[i]
-
-#ejpairs = list(EPJPdict.keys())
-
-FracPz1 = 0
-FracPz2 = 0
-FracPz3 = 0
-corpusP = 0
-
-for i in range (0,5):
-    Pz1 = EPJPdict['W_W'] * EPJPdict['AY_A'] * EPJPdict['N_I-N']
-    Pz2 = EPJPdict['W_W'] * EPJPdict['AY_A-I']* EPJPdict['N_N']
-    Pz3 = EPJPdict['W_W-A'] * EPJPdict['AY_I'] * EPJPdict['N_N']
-    FracPz1 = Pz1/(Pz1+Pz2+Pz3)
-    FracPz2 = Pz2/(Pz1+Pz2+Pz3)
-    FracPz3 = Pz3/(Pz1+Pz2+Pz3)
-    corpusP = Pz1+Pz2+Pz3
-    print 'iteration '+str(i)+' ----- corpus prob= '+str(corpusP)
+def getAlignments(epron, jpron):
     
-    EPJPdict['W_W'] = (FracPz1+FracPz2)
-    EPJPdict['AY_A'] = FracPz1
-    EPJPdict['N_I-N'] = FracPz1
-    EPJPdict['AY_A-I'] = FracPz2
-    EPJPdict['N_N'] = FracPz2+FracPz3
-    EPJPdict['W_W-A'] = FracPz3
-    EPJPdict['AY_I'] = FracPz3
-    #print 'AY|-> A: '+str(round(EPJPdict['AY_A'],2)) +' A I: '+str(round(EPJPdict['AY_A-I'],2))+ ' I: '+str(round(EPJPdict['AY_I],2))
-    print 'W|->  W: '+str(round(EPJPdict['W_W'],2)) + ' W A: '+str(round(EPJPdict['W_W-A'],2))
-    print 'N|->  N: '+str(round(EPJPdict['N_N'],2)) + ' I N: '+str(round(EPJPdict['N_I-N'],2))
+    #handle base case
+    if len(epron) == 1:
+        alignment = [[''.join(epron), ''.join(jpron)]]
+        return alignment
     
-#print 'Pz1: '+str(Pz1)
-#print 'Pz2: '+str(Pz2)
-#print 'Pz3: '+str(Pz3)
+    alignments = []
+    for i in range(min(3, len(jpron), len(epron))):
+        curr_j = ' '.join(jpron[:i + 1])
+        align = getAlignments(epron[1:],jpron[i+1:])
+        alignments += [[(epron[0], curr_j)] + r for r in align]
+    return alignments
+        
+
+while True:
+    lines = islice(file, 3)
+
+    stack =[]
+    #create the stack
+    for line in lines:
+        stack.append(line)
+    if stack == []:break
+    epron = stack[0].split()#re.split(r'(\s+)', stack[0])
+    jpron = stack[1].split()# re.split(r'(\s+)', stack[1])
+    
+    
+    epjp.append((epron, jpron))
+    
+for pair in epjp:
+    epron = pair[0]
+    jpron = pair[1]
+    al = getAlignments(epron, jpron)
+    print (al)
+    for a in al:
+        print(a)
+        for pair in a:
+            x = 1
+            del x
+            #probs[pair[0]][pair[1]] += 1
+    
+
+    
