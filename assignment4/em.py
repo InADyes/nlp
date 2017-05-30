@@ -119,7 +119,7 @@ for i in range(iterations):
                 p_EJ = round(pr_prior[epron][jpron], 3)
                 if p_EJ > 0.01:
                     nonzero += 1
-                print(epron, " : ", jpron, " # ", p_EJ)
+                    print(epron, " : ", jpron, " # ", p_EJ)
         print("Nonzero = ", nonzero)
         nonzero = 0
         pr_prior = probdict
