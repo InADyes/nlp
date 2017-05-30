@@ -98,6 +98,7 @@ for i in range(iterations):
         epron = pair[0]
         jpron = pair[1]
         alignments = getAlignments(epron, jpron)
+        #print("alignments = ", len(alignments))
         tarray = []
         for a in alignments:
             p_accum = 1
@@ -106,10 +107,21 @@ for i in range(iterations):
                 p_accum *= pr_prior[tpair[0]][tpair[1]]
             
             tarray.append(p_accum)
+            #print(tarray)
             total += p_accum
-        tarray = [p / sum(tarray) for p in tarray]
+        asum = 0
+        #print(tarray)
+        for p in tarray:
+            asum += p
+        for p in tarray:
+            if asum > 0:
+                tarray = [p / sum(tarray) for p in tarray]
+        #print(tarray)
         
+        if not isinstance(tarray, list):
+            tarray = [tarray]
         for x, j in enumerate(alignments):
+           # print(tarray)
             for k in j:
                 probdict[k[0]][k[1]] += tarray[x]
 
@@ -120,6 +132,15 @@ for i in range(iterations):
                 if p_EJ > 0.01:
                     nonzero += 1
                     print(epron, " : ", jpron, " # ", p_EJ)
+        
         print("Nonzero = ", nonzero)
         nonzero = 0
+        for t in probdict.keys():
+            q = 0
+            for e in probdict[t].keys():
+                q += probdict[t][e]
+    
+            for e in probdict[t].keys():
+                if q > 0:
+                    probdict[t][e] = probdict[t][e] / q
         pr_prior = probdict
