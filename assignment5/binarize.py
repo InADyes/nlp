@@ -31,4 +31,3 @@ for i in treedict.values():
     if len(i) > 1 and [] in i:
         i.remove([])
         
-    pollainleave()
