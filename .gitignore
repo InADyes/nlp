@@ -53,3 +53,4 @@ assignment1/strings
 assignment1/try.fsa
 assignment1/english.fsa
 assignment2/espell-eword.wfst
+*.pyc
