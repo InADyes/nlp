@@ -1,0 +1,10 @@
+TOP [0-5]
+| SQ [0-5]
+| | VBZ [0-1] Does
+| | NP [1-3]
+| | | DT [1-2] this
+| | | NN [2-3] flight
+| | VP [3-5]
+| | | VB [3-4] serve
+| | | NP [4-5]
+| | | | NN [4-5] dinner
