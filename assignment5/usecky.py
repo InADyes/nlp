@@ -1,4 +1,8 @@
+import sys
 from cky import *
 parser = PCFGParser()
-sent = "I need a flight from Atlanta to Charlotte North Carolina next Monday"
-tree = parser.parse(sent.split())
+for line in sys.stdin:
+    sent = line
+    tree = parser.parse(sent.split())
+    print tree
+
