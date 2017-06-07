@@ -13,8 +13,10 @@ def binarize(tree):
 				binarize(tree.subs[i])
 		else:
 			new_subs = [i for i in tree.subs]
-			
-			string = '('+tree.label+'\' '
+			if '\'' not in tree.label:
+                                string = '('+tree.label+'\' '
+                        else:
+                                string = '('+tree.label+' '
 			for i in range(len(tree.subs)):	
 				if i == 0:
 					binarize(tree.subs[i])
