@@ -38,14 +38,14 @@ for line in sys.stdin:
     tree = Tree.parse(line)
     getCounts(tree, countdict, probdict)
     
-    #divide probdict counts by overall num tags to get probs
-    for i in probdict:
-        for j in probdict[i]:
-            probdict[i][j] /= float(countdict[i])
-        
-    #print results
-    print("TOP")
-    for i in probdict:
-        for j in probdict[i]:
-            string = i + " -> " + j + " # " + str(probdict[i][j])
-            print string
+#divide probdict counts by overall num tags to get probs
+for i in probdict:
+    for j in probdict[i]:
+        probdict[i][j] /= float(countdict[i])
+    
+#print results
+print("TOP")
+for i in probdict:
+    for j in probdict[i]:
+        string = i + " -> " + j + " # " + str(probdict[i][j])
+        print(string)
