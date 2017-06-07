@@ -1,5 +1,5 @@
 from random import choice
-
+import sys
 class PCFGParser:
     def __init__(self, rules='grammar.pcfg.bin'):
         self.grammar = self.__read_grammar(rules)
@@ -15,7 +15,7 @@ class PCFGParser:
             tmp = rule.split()
             lhs = tmp[0]
             rhs = ' '.join(tmp[2:-2])
-            weight = round(float(tmp[-1]),4)
+            weight = float(tmp[-1])
 
             if lhs in grammar:
                 grammar[lhs][rhs] = weight
@@ -50,13 +50,13 @@ class PCFGParser:
                     results.append(r)
 
         # Handle unseen words
-        #if len(rhs.split()) == 1 and not results:
-        #    for (lhs, d) in self.grammar.iteritems():
-        #        if '<unk>' in d:
-        #            r = (lhs, d['<unk>'])
-        #            results.append(r)
+        if len(rhs.split()) == 1 and not results:
+            for (lhs, d) in self.grammar.iteritems():
+                if '<unk>' in d:
+                    r = (lhs, d['<unk>'])
+                    results.append(r)
             
-        #return results
+        return results
 
     def __to_tree(self, table, pointer, sentence, j, i, k):
         """Trace back the pointer table recursively and return the parse tree."""
@@ -175,3 +175,10 @@ class PCFGParser:
 
         # Turn the list of strings, tree, into a formatted string
         return "({})".format(' '.join(tree))
+
+if __name__ == "__main__":
+    parser = PCFGParser()
+    for line in sys.stdin:
+        sent = line
+        tree = parser.parse(sent.split())
+        print tree
