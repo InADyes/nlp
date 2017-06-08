@@ -44,8 +44,18 @@ for i in probdict:
         probdict[i][j] /= float(countdict[i])
     
 #print results
+binary = 0
+unary = 0
+lexical = 0
 print("TOP")
 for i in probdict:
     for j in probdict[i]:
+        if j in probdict.keys():
+            unary += 1
+        elif ' ' in j:
+            binary += 1
+        else:
+            lexical += 1
         string = i + " -> " + j + " # " + str(probdict[i][j])
         print(string)
+#print "Binary rules: ", binary, "\nUnary rules: ", unary, "\nLexical rules: ", lexical
